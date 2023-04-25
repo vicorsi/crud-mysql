@@ -5,6 +5,7 @@ from read import listar_usuarios, procurar_usuario
 from update import up_usuario
 from delete import del_usuario
 import pyautogui
+pyautogui.PAUSE = 1
 
 janela = Tk()
 usuarios = []
@@ -46,19 +47,19 @@ class Aplicacao():
         self.frame_3.place(relx=0.03, rely=0.44, relwidth=0.94, relheight=0.23)
 
     def botoes(self):
-        self.btDimensao = Button(self.janela, text="Tela", command=self.delete_user)
+        self.btDimensao = Button(self.janela, text="Tela", command=self.monitor)
         self.btDimensao.place(relx=0.05, rely=0.50, relwidth=0.15, relheight=0.1)
 
-        self.btPosicao = Button(self.janela, text="Posicao", command=self.delete_user)
+        self.btPosicao = Button(self.janela, text="Posicao", command=self.posicao)
         self.btPosicao.place(relx=0.20, rely=0.50, relwidth=0.15, relheight=0.1)
 
-        self.btMover = Button(self.janela, text="Mover", command=self.delete_user)
+        self.btMover = Button(self.janela, text="Mover", command=self.move_mouse)
         self.btMover.place(relx=0.35, rely=0.50, relwidth=0.15, relheight=0.1)
 
-        self.btBot = Button(self.janela, text="Bot", command=self.delete_user)
+        self.btBot = Button(self.janela, text="Bot", command=self.bot)
         self.btBot.place(relx=0.50, rely=0.50, relwidth=0.15, relheight=0.1)
 
-        self.btAlerta = Button(self.janela, text="Alerta", command=self.delete_user)
+        self.btAlerta = Button(self.janela, text="Alerta", command=self.alerta)
         self.btAlerta.place(relx=0.65, rely=0.50, relwidth=0.15, relheight=0.1)
 
         self.btCaptura = Button(self.janela, text="Captura", command=self.delete_user)
@@ -183,4 +184,38 @@ class Aplicacao():
         self.inpTipo.delete(0, END)
         self.inpIdade.delete(0, END)
         self.listaCli.delete(*self.listaCli.get_children())
+
+    def monitor(self):
+        x, y = pyautogui.size()
+        print(x)
+        print(y)
+
+    def posicao(self):
+        x, y = pyautogui.position()
+        print(x)
+        print(y)
+
+    def move_mouse(self):
+        pyautogui.moveTo(100, 150)
+
+    def bot(self):
+        pyautogui.press("win")
+        pyautogui.write("bloco")
+        pyautogui.press("enter")
+        pyautogui.write("Meus amigos")
+        pyautogui.hotkey("ctrl", "s")
+        pyautogui.write("Café")
+        for i in range(10):
+            pyautogui.press("tab")
+        pyautogui.press("up")
+        pyautogui.press("enter")
+        pyautogui.hotkey("alt", "l")
+        pyautogui.hotkey("win", "d")
+
+    def alerta(self):
+        pyautogui.alert(text="Teste", title="Caixa de Texto", button=["Ok"])
+        print(pyautogui.confirm(text="Teste", title="Caixa de Texto", button=["Ok", "Cancel"]))
+
+    def captura(self):
+        pass
 
